@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import { gemini_prompt } from "./gemini/gemini";
 import ReactMarkdown from "react-markdown";
+import { useAtom } from "jotai";
 
-function buildPrompt(description, questions, response) {
+import { resumeAtom } from "./utils/jotai";
+
+function buildPrompt(description, questions, response, resume) {
     return `
         You need to help me analyze how well I did in my interview. Criticize every aspect of my response so that I can improve, do NOT hold back.
 
         This is the job description that I am applying for: ${description}
         This is the question that I was asked: ${questions}
         This is the response that I gave: ${response}
+        This is my resume: ${resume}
 
         The response that I give is NOT formatted and has no grammar because it is strictly speech to text. Assume grammatically correct but use the context of live spoken to analyze. Based on the the question and response. Provide a detailed analysis of what I did well and what I could improve on. Be as critical as possible and do NOT hold back.
 
@@ -20,7 +24,7 @@ function buildPrompt(description, questions, response) {
         Confidence: How confident was I in my response?
         Clarity: How clear was my response?
 
-        And then, comment on what I did well and what I could improve on. Be as detailed as possible and do NOT hold back.
+        And then, comment on what I did well and what I could improve on. Be as detailed as possible and do NOT hold back. When giving feedback, be sure to reference by resume and how we can shape my answer following my resume or things that I can infer. However, you should NOT judge my resume itself, only judge the response that I gave and how stuff in my resume could have helped me answer the question better.
 
         An exact response format should be:
         Communication: 5/5
@@ -46,9 +50,11 @@ export default function Results({ setStatus, setIndex, description, question, re
     const [analysis, setAnalysis] = useState("");
     const [loading, setLoading] = useState(true);
 
+    const [resume] = useAtom(resumeAtom);
+
     useEffect(() => {
         // Set the prompt
-        const newPrompt = buildPrompt(description, question, response);
+        const newPrompt = buildPrompt(description, question, response, resume);
         setPrompt(newPrompt);
 
         // Generate the analysis
