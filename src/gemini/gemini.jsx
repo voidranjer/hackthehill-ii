@@ -13,7 +13,7 @@ export async function gemini_prompt(prompt, setResponse, setLoading) {
         setResponse(response.text());
     } catch (error) {
         console.error("Error generating content:", error);
-        setResponse("An error occurred while generating the response.");
+        setResponse("An error occurred while generating the response." + error);
     } finally {
         setLoading(false);
     }

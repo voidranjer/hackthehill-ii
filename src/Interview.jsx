@@ -26,6 +26,8 @@ export default function Interview() {
     const [question, setQuestion] = useState("");
     const [response, setResponse] = useState("");
     const [loading, setLoading] = useState(true);
+    const [index, setIndex] = useState(0);
+    const [newQuestion, setNewQuestion] = useState(false);
 
     const [searchParams] = useSearchParams();
 
@@ -41,13 +43,21 @@ export default function Interview() {
             const prompt = buildPrompt(description, questions);
             gemini_prompt(prompt, setQuestion, setLoading);
         }
-    }, [description, questions]);
+    }, [description, questions, newQuestion]);
 
     useEffect(() => {
         if (question) {
             setQuestions(prevQuestions => prevQuestions ? `${prevQuestions}; ${question}` : question);
         }
     }, [question]);
+
+    // reset the question and response when the index changes
+    useEffect(() => {
+        setQuestion("");
+        setResponse("");
+        setLoading(true);
+        setNewQuestion(!newQuestion);
+    }, [index]);
 
     if (status === "question") {
         return (
@@ -69,6 +79,7 @@ export default function Interview() {
         return (
             <Results 
                 setStatus={setStatus}
+                setIndex={setIndex}
                 description={description}
                 question={question}
                 response={response}
