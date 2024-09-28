@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./Home";
 import Interview from "./Interview";
+import Temp from "./Temp";
 
 function App() {
     return (
@@ -9,6 +10,7 @@ function App() {
             <Routes>
                 <Route index element={<Home />} />
                 <Route path="/interview" element={<Interview />} />
+                <Route path="/temp" element={<Temp />} />
                 <Route path="*" element={<Home />} />
             </Routes>
         </BrowserRouter>
