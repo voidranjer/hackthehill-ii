@@ -13,7 +13,7 @@ function buildPrompt(description, questions) {
 
         Generate only ONE question that could be asked to help improve in a technical or behavioral aspect of the job for the job interview. The question should be open-ended and should not be a yes or no question.
 
-        Question: "${questions}" End of question.
+        Questions already asked: "${questions}" End of questions. Do not ask a question that has already been asked.
 
         You should provide the question in only 1 line, and the question should be relevant to the job description provided. Do NOT add any additional markup formatting in your response and ONLY provide the question in the response.
     `;
@@ -41,9 +41,10 @@ export default function Interview() {
     useEffect(() => {
         if (description) {
             const prompt = buildPrompt(description, questions);
+            console.log(prompt);
             gemini_prompt(prompt, setQuestion, setLoading);
         }
-    }, [description, questions, newQuestion]);
+    }, [description, newQuestion]);
 
     useEffect(() => {
         if (question) {

@@ -10,7 +10,7 @@ function buildPrompt(description, questions, response) {
         This is the question that I was asked: ${questions}
         This is the response that I gave: ${response}
 
-        Based on the the question and response. Provide a detailed analysis of what I did well and what I could improve on. Be as critical as possible and do NOT hold back.
+        The response that I give is NOT formatted and has no grammar because it is strictly speech to text. Assume grammatically correct but use the context of live spoken to analyze. Based on the the question and response. Provide a detailed analysis of what I did well and what I could improve on. Be as critical as possible and do NOT hold back.
 
         Your response should include:
         The bottom should all be rated out of 5.
