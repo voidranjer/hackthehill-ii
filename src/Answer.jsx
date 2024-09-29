@@ -38,33 +38,33 @@ export default function Answer({ setStatus, question, setResponse, setDistracted
         browserSupportsSpeechRecognition
     } = useSpeechRecognition({ commands });
 
-    useEffect(() => {
-        console.log("Component mounted or updated");
-        console.log("Browser supports speech recognition:", browserSupportsSpeechRecognition);
+    // useEffect(() => {
+    //     console.log("Component mounted or updated");
+    //     console.log("Browser supports speech recognition:", browserSupportsSpeechRecognition);
         
-        let timer = null;
-        if (listening) {
-            console.log("Starting timer");
-            timer = setInterval(() => {
-                setTimeLeft((prevTime) => {
-                    console.log("Time left:", prevTime - 1);
-                    if (prevTime <= 1) {
-                        console.log("Time's up, stopping recording");
-                        handleStopRecording();
-                        return 0;
-                    }
-                    return prevTime - 1;
-                });
-            }, 1000);
-        }
+    //     let timer = null;
+    //     if (listening) {
+    //         console.log("Starting timer");
+    //         timer = setInterval(() => {
+    //             setTimeLeft((prevTime) => {
+    //                 console.log("Time left:", prevTime - 1);
+    //                 if (prevTime <= 1) {
+    //                     console.log("Time's up, stopping recording");
+    //                     handleStopRecording();
+    //                     return 0;
+    //                 }
+    //                 return prevTime - 1;
+    //             });
+    //         }, 1000);
+    //     }
 
-        return () => {
-            if (timer) {
-                console.log("Clearing timer");
-                clearInterval(timer);
-            }
-        };
-    }, [listening, transcript]);
+    //     return () => {
+    //         if (timer) {
+    //             console.log("Clearing timer");
+    //             clearInterval(timer);
+    //         }
+    //     };
+    // }, [listening, transcript]);
 
     useEffect(() => {
         // if distracted, save the distracted state and the time
@@ -102,7 +102,7 @@ export default function Answer({ setStatus, question, setResponse, setDistracted
             <div className="p-4 bg-white shadow-lg rounded-lg w-full max-w-xl">
                 <h1 className="text-2xl font-bold text-center mb-4">Interview</h1>
                 <p className="text-center mb-4">{question}</p>
-                <p className="text-center mb-4">Time left: {timeLeft} seconds</p>
+                {/* <p className="text-center mb-4">Time left: {timeLeft} seconds</p> */}
                 <div className="text-center mb-4">
                     {listening ? (
                         <button
