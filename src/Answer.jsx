@@ -1,9 +1,11 @@
 import "regenerator-runtime/runtime.js";
 import React, { useState, useEffect } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import FaceAnalysis from "./utils/FaceAnalysis";
 
-export default function Answer({ setStatus, question, setResponse }) {
+export default function Answer({ setStatus, question, setResponse, setDistractedTimes }) {
     const [timeLeft, setTimeLeft] = useState(30);
+    const [distracted, setDistracted] = useState(false);
 
     const commands = [
         {
@@ -64,6 +66,12 @@ export default function Answer({ setStatus, question, setResponse }) {
         };
     }, [listening, transcript]);
 
+    useEffect(() => {
+        // if distracted, save the distracted state and the time
+        const currentTime = new Date().toLocaleTimeString();
+        setDistractedTimes((prevTimes) => `${prevTimes}(Time: ${currentTime} -> Was distracted: ${distracted}), `);
+    }, [distracted]);
+
     const handleStartRecording = () => {
         console.log("Starting recording");
         SpeechRecognition.startListening({ continuous: true })
@@ -91,7 +99,7 @@ export default function Answer({ setStatus, question, setResponse }) {
 
     return (
         <div className="flex items-center justify-center h-screen bg-gray-100">
-            <div className="p-4 bg-white shadow-lg rounded-lg w-full max-w-md">
+            <div className="p-4 bg-white shadow-lg rounded-lg w-full max-w-xl">
                 <h1 className="text-2xl font-bold text-center mb-4">Interview</h1>
                 <p className="text-center mb-4">{question}</p>
                 <p className="text-center mb-4">Time left: {timeLeft} seconds</p>
@@ -118,6 +126,11 @@ export default function Answer({ setStatus, question, setResponse }) {
                         </button>
                     )}
                 </div>
+                
+                <div className="flex w-full justify-center items-center">
+                    <FaceAnalysis distracted={distracted} setDistracted={setDistracted} />
+                </div>
+
                 <div className="border p-2 h-32 overflow-y-auto mb-4">
                     <p>{transcript}</p>
                 </div>

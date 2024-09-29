@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 
 import { resumeAtom } from "./utils/jotai";
 
-function buildPrompt(description, questions, response, resume) {
+function buildPrompt(description, questions, response, resume, distractedTimes) {
     return `
         You need to help me analyze how well I did in my interview. Criticize every aspect of my response so that I can improve, do NOT hold back.
 
@@ -13,6 +13,8 @@ function buildPrompt(description, questions, response, resume) {
         This is the question that I was asked: ${questions}
         This is the response that I gave: ${response}
         This is my resume: ${resume}
+        These were the times that I was distracted during the interview: ${distractedTimes}
+        Everytime my distracted times are logged, then that means that was when the distracted state was changed to the new value. In our case, distracted means that me, the interviewer, was not looking at the camera. This is important because it can help us analyze my behaviour during the interview.
 
         The response that I give is NOT formatted and has no grammar because it is strictly speech to text. Assume grammatically correct but use the context of live spoken to analyze. Based on the the question and response. Provide a detailed analysis of what I did well and what I could improve on. Be as critical as possible and do NOT hold back.
 
@@ -24,7 +26,7 @@ function buildPrompt(description, questions, response, resume) {
         Confidence: How confident was I in my response?
         Clarity: How clear was my response?
 
-        And then, comment on what I did well and what I could improve on. Be as detailed as possible and do NOT hold back. When giving feedback, be sure to reference by resume and how we can shape my answer following my resume or things that I can infer. However, you should NOT judge my resume itself, only judge the response that I gave and how stuff in my resume could have helped me answer the question better.
+        And then, comment on what I did well and what I could improve on. Be as detailed as possible and do NOT hold back. When giving feedback, be sure to reference by resume and how we can shape my answer following my resume or things that I can infer. However, you should NOT judge my resume itself, only judge the response that I gave and how stuff in my resume could have helped me answer the question better. If I was distracted during the interview, you should also comment on how that affected my response.
 
         An exact response format should be:
         Communication: 5/5
@@ -45,7 +47,7 @@ function buildPrompt(description, questions, response, resume) {
     `;
 }
 
-export default function Results({ setStatus, setIndex, description, question, response }) {
+export default function Results({ setStatus, setIndex, description, question, response, distractedTimes }) {
     const [prompt, setPrompt] = useState("");
     const [analysis, setAnalysis] = useState("");
     const [loading, setLoading] = useState(true);
@@ -54,7 +56,7 @@ export default function Results({ setStatus, setIndex, description, question, re
 
     useEffect(() => {
         // Set the prompt
-        const newPrompt = buildPrompt(description, question, response, resume);
+        const newPrompt = buildPrompt(description, question, response, resume, distractedTimes);
         setPrompt(newPrompt);
 
         // Generate the analysis

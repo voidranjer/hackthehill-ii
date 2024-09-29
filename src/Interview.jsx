@@ -28,6 +28,7 @@ export default function Interview() {
     const [loading, setLoading] = useState(true);
     const [index, setIndex] = useState(0);
     const [newQuestion, setNewQuestion] = useState(false);
+    const [distractedTimes, setDistractedTimes] = useState("");
 
     const [searchParams] = useSearchParams();
 
@@ -74,6 +75,7 @@ export default function Interview() {
                 setStatus={setStatus}
                 question={question}
                 setResponse={setResponse}
+                setDistractedTimes={setDistractedTimes}
             />
         );
     } else if (status === "results") {
@@ -84,6 +86,7 @@ export default function Interview() {
                 description={description}
                 question={question}
                 response={response}
+                distractedTimes={distractedTimes}
             />
         )
     }
