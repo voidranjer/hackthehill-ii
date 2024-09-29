@@ -18,6 +18,8 @@ export default function Profile() {
     const [history] = useAtom(historyAtom);
     console.log("History: ", history);
 
+    const sortedHistory = history.sort((a, b) => new Date(b.date) - new Date(a.date));
+
     return (
         <>
             <Navbar />
@@ -27,7 +29,7 @@ export default function Profile() {
                     <h1 className="text-2xl font-semibold text-gray-800">Past Interviews</h1>
                     
                     <div className="grid">
-                        {history.map((interview, index) => (
+                        {sortedHistory.map((interview, index) => (
                             <HistoryItem key={index} interview={interview} />
                         ))}
                     </div>

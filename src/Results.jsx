@@ -87,7 +87,7 @@ export default function Results({ setStatus, setIndex, description, question, re
                 if (isDuplicate) {
                     return prevHistory;
                 } else {
-                    return [...prevHistory, newHistory];
+                    return [newHistory, ...prevHistory];
                 }
             });
             console.log("History: ", history);
