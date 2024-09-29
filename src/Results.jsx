@@ -108,11 +108,11 @@ export default function Results({ setStatus, setIndex, description, question, re
             <Navbar />
             <div className="flex items-center justify-center h-screen bg-gray-100 z-[100]">
                 <div className="p-4 bg-white shadow-lg rounded-lg">
-                    <h1 className="text-2xl font-bold text-center">Results for {question}</h1>
+                    <h1 className="text-2xl font-bold text-center">Results for "{question}"</h1>
                     <hr className="mt-[2vw]"/>
-                    <p className="text-left mt-[3vw]">{response}</p>
+                    <p className="text-left mt-[3vw]">Your response: {response}</p>
                     <div className="text-left">
-                        <ReactMarkdown>{analysis}</ReactMarkdown>
+                        Analysis: <ReactMarkdown>{analysis}</ReactMarkdown>
                     </div>
                 </div>
 

@@ -58,6 +58,13 @@ export default function Interview() {
         }
     }, [question]);
 
+    // increment progress only once when changed to results
+    useEffect(() => {
+        if (status === "results") {
+            setProgress(progress + 20); // increase the progress by 20%
+        }
+    }, [status]);
+
     // reset the question and response when the index changes
     useEffect(() => {
         setQuestion("");
@@ -88,7 +95,7 @@ export default function Interview() {
             />
         );
     } else if (status === "results") {
-        setProgress(progress + 20); // increase the progress by 20%
+        // setProgress(progress + 20); // increase the progress by 20%
         return (
             <Results 
                 setStatus={setStatus}
