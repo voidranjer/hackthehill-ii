@@ -99,7 +99,7 @@ export default function Results({ setStatus, setIndex, description, question, re
         <>
             <Navbar />
             <div className="flex items-center justify-center h-screen bg-gray-100 z-[100]">
-                <div className="p-4 bg-white shadow-lg rounded-lg z-[100]">
+                <div className="p-4 bg-white shadow-lg rounded-lg">
                     <h1 className="text-2xl font-bold text-center">Results for {question}</h1>
                     <hr className="mt-[2vw]"/>
                     <p className="text-left mt-[3vw]">{response}</p>
@@ -113,7 +113,7 @@ export default function Results({ setStatus, setIndex, description, question, re
                         setIndex((prevIndex) => prevIndex + 1);
                         setStatus("question")}
                     }
-                    className="fixed bottom-4 right-4 px-4 py-2 text-white bg-blue-500 rounded-lg"
+                    className="fixed bottom-4 right-4 px-4 py-2 text-white bg-green-500 hover:opacity-[60%] active:opacity-[30%] rounded-lg"
                 >
                     Next Question
                 </button>
