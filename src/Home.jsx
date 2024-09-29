@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useAtom } from 'jotai'
 import { Link, useNavigate } from 'react-router-dom';
 import pdfToText from "react-pdftotext";
@@ -11,7 +11,7 @@ function JobPosting({ job }) {
 
     return (
         <Link 
-            className='flex flex-col bg-red-300 w-full h-[264px] rounded-2xl'
+            className='hover:opacity-[60%] active:opacity-[30%] flex flex-col w-[80%] h-[264px] rounded-2xl'
             to={url}
         >
             <img src={job.icon} alt="Job Icon" className="object-contain w-10 h-12" />
@@ -48,12 +48,15 @@ export default function Home() {
         }
 
     }
-
+    const sectionRef = useRef(null);
+    const scrollToSection = () => {
+        sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+      };
     return (
         <>
             <Navbar />
             <form onSubmit={handleFormSubmit}>
-                <div className="flex justify-center items-center w-screen h-screen flex-col bg-white overflow-x-hidden">
+                <div className="flex justify-center items-center w-screen h-screen flex-col bg-red-200 overflow-x-hidden">
                 {/* External Div */}
                 <div className="mt-[5vw] min-w-[400px] min-h-[300px] border-2 border-dashed border-[#818183] p-4 rounded-2xl">
                     {/* Interior Div */}
@@ -163,7 +166,7 @@ export default function Home() {
                         className="ml-2 p-2 border rounded bg-[#F8F8F8] border-none"
                     />
                     <div className='flex w-full justify-center'>
-                    <button type="submit" className="w-[40%] gap-4 flex mt-[5vw] p-2 shadow-xl font-bold bg-gradient-to-r from-[#7CFF7C] to-gray-400 text-transparent bg-clip-text rounded">
+                    <button type="submit" className="w-[40%] gap-4 flex mt-[3vw] p-2 shadow-xl font-bold bg-gradient-to-r from-[#7CFF7C] to-gray-400 text-transparent bg-clip-text rounded">
                     Get Started
                     <svg
                         width="38"
@@ -255,15 +258,16 @@ export default function Home() {
                     
                     </div>
                 </div>
-                <div className='w-full mt-[3vw] flex justify-center items-center'>
-                <button className='bg-black'> rarara </button>
-            </div>
                 </div>
+
             </form>
+            <div className='w-full mt-[3vw] flex justify-center items-center'>
+                <button onClick={scrollToSection} className='absolute bottom-0 w-[15vw] text-[12px] hover:opacity-[60%] active:opacity-[30%] p-2 bg-gradient-to-r from-[#7CFF7C] to-gray-400 text-white rounded-t-2xl'> View Available Jobs </button>
             
+                </div>
             
             {/* jobs */}
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-5  h-[256px] overflow-y-auto'>
+            <div ref={sectionRef} className='overflow-x-hidden grid grid-cols-1 md:grid-cols-3 gap-5 h-screen overflow-y-auto'>
                 {jobs.map((job) => (
                     <JobPosting key={job.job_title} job={job} />
                 ))}
