@@ -269,7 +269,7 @@ export default function Home() {
             
             {/* jobs */}
 
-            <div ref={sectionRef} className='justify-center text-center content-center bg-[#E9EBEA] pl-[7vw] p-5 grid grid-cols-1 md:grid-cols-3 gap-5 h-screen w-screen bg-[#dfdfdf] overflow-y-auto'>
+            <div ref={sectionRef} className='justify-center text-center content-center bg-[#EBECEE] pl-[7vw] p-5 grid grid-cols-1 md:grid-cols-3 gap-5 h-screen w-screen bg-[#dfdfdf] overflow-y-auto'>
                 {jobs.map((job) => (
                     <JobPosting key={job.job_title} job={job} />
                 ))}
