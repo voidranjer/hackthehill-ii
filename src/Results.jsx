@@ -3,7 +3,7 @@ import { gemini_prompt } from "./gemini/gemini";
 import ReactMarkdown from "react-markdown";
 import { useAtom } from "jotai";
 
-import { resumeAtom } from "./utils/jotai";
+import { resumeAtom, historyAtom } from "./utils/jotai";
 
 function buildPrompt(description, questions, response, resume, distractedTimes) {
     return `
@@ -53,6 +53,7 @@ export default function Results({ setStatus, setIndex, description, question, re
     const [loading, setLoading] = useState(true);
 
     const [resume] = useAtom(resumeAtom);
+    const [history, setHistory] = useAtom(historyAtom);
 
     useEffect(() => {
         // Set the prompt
@@ -68,6 +69,20 @@ export default function Results({ setStatus, setIndex, description, question, re
             console.log("Prompt: ", prompt);
         }
     }, [prompt]);
+
+    // save the history of the interview
+    useEffect(() => {
+        if (analysis) {
+            const newHistory = {
+                question,
+                response,
+                analysis,
+            };
+
+            setHistory((prevHistory) => [...prevHistory, newHistory]);
+            console.log("History: ", history);
+        }
+    }, [analysis]);
 
     return (
         <div className="flex items-center justify-center h-screen bg-gray-100">
