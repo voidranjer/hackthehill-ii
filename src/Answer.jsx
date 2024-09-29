@@ -148,7 +148,7 @@ export default function Answer({ setStatus, question, setResponse, setDistracted
                         console.log("Finish button clicked");
                         setResponse(transcript);
                         setStatus("results");
-                    }} className="absolute bottom-10 left-[47%] p-3 rounded-[15px] shadow-xl font-bold bg-gradient-to-r from-[#7CFF7C] to-gray-400 text-transparent bg-clip-text">Next question -></button>
+                    }} className="absolute bottom-10 left-[47%] p-3 rounded-[15px] shadow-xl font-bold bg-gradient-to-r from-[#7CFF7C] to-gray-400 text-transparent bg-clip-text">Analyze</button>
                 </div>
             </div>
         </>

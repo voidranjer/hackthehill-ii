@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { useAtom } from "jotai";
 
 import { resumeAtom, historyAtom } from "./utils/jotai";
+import Navbar from "./components/Navbar";
 
 function buildPrompt(description, questions, response, resume, distractedTimes) {
     return `
@@ -95,25 +96,28 @@ export default function Results({ setStatus, setIndex, description, question, re
     }, [analysis]);
 
     return (
-        <div className="flex items-center justify-center h-screen bg-gray-100">
-            <div className="p-4 bg-white shadow-lg rounded-lg">
-                <h1 className="text-2xl font-bold text-center">Results</h1>
-                <p className="text-center">{question}</p>
-                <p className="text-center">{response}</p>
-                <div className="text-center">
-                    <ReactMarkdown>{analysis}</ReactMarkdown>
+        <>
+            <Navbar />
+            <div className="flex items-center justify-center h-screen bg-gray-100">
+                <div className="p-4 bg-white shadow-lg rounded-lg">
+                    <h1 className="text-2xl font-bold text-center">Results</h1>
+                    <p className="text-center">{question}</p>
+                    <p className="text-center">{response}</p>
+                    <div className="text-center">
+                        <ReactMarkdown>{analysis}</ReactMarkdown>
+                    </div>
                 </div>
-            </div>
 
-            <button
-                onClick={() => {
-                    setIndex((prevIndex) => prevIndex + 1);
-                    setStatus("question")}
-                }
-                className="fixed bottom-4 right-4 px-4 py-2 text-white bg-blue-500 rounded-lg"
-            >
-                Next Question
-            </button>
-        </div>
+                <button
+                    onClick={() => {
+                        setIndex((prevIndex) => prevIndex + 1);
+                        setStatus("question")}
+                    }
+                    className="fixed bottom-4 right-4 px-4 py-2 text-white bg-blue-500 rounded-lg"
+                >
+                    Next Question
+                </button>
+            </div>
+        </>
     );
 }
