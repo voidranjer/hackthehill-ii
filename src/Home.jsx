@@ -7,7 +7,7 @@ import { resumeAtom } from './utils/jotai';
 import { jobs } from './utils/jobs';
 
 function JobPosting({ job }) {
-    const url = "/interview?description=" + encodeURIComponent("Company Name: " + job.company_name + " Job Title: " + job.job_title + " Job Location: " + job.location + " Job Description: " + job.job_description);
+    const url = "/interview?description=" + encodeURIComponent("Company Name: " + job.company_name + " Job Title: " + job.job_title + " Job Location: " + job.job_location + " Job Description: " + job.job_description);
 
     return (
         <Link 
@@ -16,7 +16,7 @@ function JobPosting({ job }) {
         >
             <img src={job.icon} alt="Job Icon" className="object-contain w-10 h-12" />
             <h2>{job.company_name} - {job.job_title}</h2>
-            <div>{job.posted_date} - {job.location}</div>
+            <div>{job.posted_date} - {job.job_location}</div>
             {/* Job Location doesn't work */}
             {/* <p className='truncate text-wrap'>{job.job_description}</p> */}
         </Link>
