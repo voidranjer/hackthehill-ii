@@ -73,13 +73,23 @@ export default function Results({ setStatus, setIndex, description, question, re
     // save the history of the interview
     useEffect(() => {
         if (analysis) {
+            // current date
+            const date = new Date();
             const newHistory = {
                 question,
                 response,
                 analysis,
+                date: date.toLocaleString()
             };
 
-            setHistory((prevHistory) => [...prevHistory, newHistory]);
+            setHistory((prevHistory) => {
+                const isDuplicate = prevHistory.some((item) => item.question === newHistory.question && item.response === newHistory.response);
+                if (isDuplicate) {
+                    return prevHistory;
+                } else {
+                    return [...prevHistory, newHistory];
+                }
+            });
             console.log("History: ", history);
         }
     }, [analysis]);
