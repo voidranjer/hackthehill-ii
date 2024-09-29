@@ -97,11 +97,11 @@ export default function Results({ setStatus, setIndex, description, question, re
         }
     }, [analysis]);
 
-    if (progress >= 100) {
-        return (
-            <FinalResults />
-        );
-    }
+    // if (progress >= 100) {
+    //     return (
+    //         <FinalResults />
+    //     );
+    // }
 
     return (
         <>
@@ -116,7 +116,7 @@ export default function Results({ setStatus, setIndex, description, question, re
                     </div>
                 </div>
 
-                <button
+                {progress < 100 ? <button
                     onClick={() => {
                         setIndex((prevIndex) => prevIndex + 1);
                         setStatus("question")}
@@ -125,6 +125,15 @@ export default function Results({ setStatus, setIndex, description, question, re
                 >
                     Next Question
                 </button>
+                : <button
+                    onClick={() => {
+                        // setIndex((prevIndex) => prevIndex + 1);
+                        setStatus("summary")}
+                    }
+                    className="fixed bottom-4 right-4 px-4 py-2 text-white bg-green-500 hover:opacity-[60%] active:opacity-[30%] rounded-lg"
+                >
+                    View Summary!
+                </button>}
             </div>
         </>
     );

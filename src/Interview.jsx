@@ -73,7 +73,7 @@ export default function Interview() {
         setNewQuestion(!newQuestion);
     }, [index]);
 
-    if (progress >= 100) {
+    if (status === "summary") {
         return (
             <FinalResults />
         );
