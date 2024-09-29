@@ -262,14 +262,14 @@ export default function Home() {
                 </div>
 
             </form>
-            <div className='w-full mt-[3vw] flex justify-center items-center'>
+            <div className='w-full flex justify-center items-center'>
                 <button onClick={scrollToSection} className='absolute bottom-0 w-[15vw] text-[12px] hover:opacity-[60%] active:opacity-[30%] p-2 bg-gradient-to-r from-[#7CFF7C] to-gray-400 text-white rounded-t-2xl'> View Available Jobs </button>
             
                 </div>
             
             {/* jobs */}
 
-            <div ref={sectionRef} className=' overflow-x-hidden justify-center p-5 grid grid-cols-1 md:grid-cols-3 gap-5 h-screen w-screen bg-[#dfdfdf] overflow-y-auto'>
+            <div ref={sectionRef} className='justify-center text-center content-center pl-[6vw] p-5 grid grid-cols-1 md:grid-cols-3 gap-5 h-screen w-screen bg-[#dfdfdf] overflow-y-auto'>
                 {jobs.map((job) => (
                     <JobPosting key={job.job_title} job={job} />
                 ))}

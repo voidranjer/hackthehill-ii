@@ -2,7 +2,7 @@ import "regenerator-runtime/runtime.js";
 import React, { useState, useEffect } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import FaceAnalysis from "./utils/FaceAnalysis";
-
+import Navbar from "./components/Navbar";
 export default function Answer({ setStatus, question, setResponse, setDistractedTimes }) {
     const [timeLeft, setTimeLeft] = useState(30);
     const [distracted, setDistracted] = useState(false);
@@ -98,57 +98,64 @@ export default function Answer({ setStatus, question, setResponse, setDistracted
     console.log("Current transcript:", transcript);
 
     return (
-        <div className="flex items-center justify-center h-screen bg-gray-100">
-            <div className="p-4 bg-white shadow-lg rounded-lg w-full max-w-xl">
-                <h1 className="text-2xl font-bold text-center mb-4">Interview</h1>
-                <p className="text-center mb-4">{question}</p>
-                {/* <p className="text-center mb-4">Time left: {timeLeft} seconds</p> */}
-                <div className="text-center mb-4">
-                    {listening ? (
-                        <button
-                            onClick={() => {
-                                console.log("Stop button clicked");
-                                handleStopRecording();
-                            }}
-                            className="px-4 py-2 text-white bg-red-500 rounded-lg mr-2"
-                        >
-                            Stop Recording
-                        </button>
-                    ) : (
-                        <button
-                            onClick={() => {
-                                console.log("Start button clicked");
-                                handleStartRecording();
-                            }}
-                            className="px-4 py-2 text-white bg-green-500 rounded-lg mr-2"
-                        >
-                            Start Recording
-                        </button>
-                    )}
-                </div>
-                
-                <div className="flex w-full justify-center items-center">
-                    <FaceAnalysis distracted={distracted} setDistracted={setDistracted} />
+        <>
+            <Navbar></Navbar> 
+            <div className="flex items-center justify-center h-screen bg-gray-100">
+                <div className="flex flex-col">
+                    <h1 className="">Question {}</h1>
+                    <div className="p-4 bg-white shadow-lg rounded-lg w-full max-w-xl">
+                        <h1 className="text-2xl font-bold text-center mb-4">Interview</h1>
+                        <p className="text-center mb-4">{question}</p>
+                        {/* <p className="text-center mb-4">Time left: {timeLeft} seconds</p> */}
+                        <div className="text-center mb-4">
+                            {listening ? (
+                                <button
+                                    onClick={() => {
+                                        console.log("Stop button clicked");
+                                        handleStopRecording();
+                                    }}
+                                    className="px-4 py-2 text-white bg-red-500 rounded-lg mr-2"
+                                >
+                                    Stop Recording
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        console.log("Start button clicked");
+                                        handleStartRecording();
+                                    }}
+                                    className="px-4 py-2 text-white bg-green-500 rounded-lg mr-2"
+                                >
+                                    Start Recording
+                                </button>
+                            )}
+                        </div>
+                        <div className="border p-2 h-32 overflow-y-auto mb-4">
+                            <p>{transcript}</p>
+                        </div>
+                    </div>
+                    
+                    <div className="">
+                        <FaceAnalysis distracted={distracted} setDistracted={setDistracted} />
+                    </div>
+
+
+                    {/* <p className="text-sm text-gray-600 mt-2">
+                        Voice commands: "Start recording", "Stop recording", "Finish interview"
+                    </p> */}
                 </div>
 
-                <div className="border p-2 h-32 overflow-y-auto mb-4">
-                    <p>{transcript}</p>
-                </div>
-                {/* <p className="text-sm text-gray-600 mt-2">
-                    Voice commands: "Start recording", "Stop recording", "Finish interview"
-                </p> */}
+                <button
+                    onClick={() => {
+                        console.log("Finish button clicked");
+                        setResponse(transcript);
+                        setStatus("results");
+                    }}
+                    className="fixed bottom-4 right-4 px-4 py-2 text-white bg-blue-500 rounded-lg"
+                >
+                    Finish!
+                </button>
             </div>
-
-            <button
-                onClick={() => {
-                    console.log("Finish button clicked");
-                    setResponse(transcript);
-                    setStatus("results");
-                }}
-                className="fixed bottom-4 right-4 px-4 py-2 text-white bg-blue-500 rounded-lg"
-            >
-                Finish!
-            </button>
-        </div>
+        </>
     );
 }
