@@ -3,7 +3,7 @@ import { FiUser } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
-const Navbar = () => {
+const Navbar = ({ progress }) => {
     const [progress, setProgress] = useState(70); // example progress value
 
     useEffect(() => {

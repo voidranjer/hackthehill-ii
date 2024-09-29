@@ -100,12 +100,9 @@ export default function Answer({ setStatus, question, setResponse, setDistracted
     return (
         <>
             <Navbar></Navbar> 
-            <div className="flex items-center justify-center h-screen bg-gray-100">
-                <div className="flex flex-col">
-                    <h1 className="">Question {}</h1>
-                    <div className="p-4 bg-white shadow-lg rounded-lg w-full max-w-xl">
-                        <h1 className="text-2xl font-bold text-center mb-4">Interview</h1>
-                        <p className="text-center mb-4">{question}</p>
+            <div className="flex flex-row items-center justify-center h-screen bg-gray-100">
+            <div className="p-4 bg-white shadow-lg rounded-lg w-full max-w-xl">
+                        <h1 className="text-lg font-semibold text-left mb-4">{question}</h1>
                         {/* <p className="text-center mb-4">Time left: {timeLeft} seconds</p> */}
                         <div className="text-center mb-4">
                             {listening ? (
@@ -134,8 +131,10 @@ export default function Answer({ setStatus, question, setResponse, setDistracted
                             <p>{transcript}</p>
                         </div>
                     </div>
+                <div className="flex flex-col">
                     
-                    <div className="">
+                    <div className>
+                        <div className="w-[30vw] h-[30vw] mt-[-28vw]"></div>
                         <FaceAnalysis distracted={distracted} setDistracted={setDistracted} />
                     </div>
 
@@ -144,17 +143,13 @@ export default function Answer({ setStatus, question, setResponse, setDistracted
                         Voice commands: "Start recording", "Stop recording", "Finish interview"
                     </p> */}
                 </div>
-
-                <button
-                    onClick={() => {
+                <div className="flex justify-center items-center">
+                    <button                     onClick={() => {
                         console.log("Finish button clicked");
                         setResponse(transcript);
                         setStatus("results");
-                    }}
-                    className="fixed bottom-4 right-4 px-4 py-2 text-white bg-blue-500 rounded-lg"
-                >
-                    Finish!
-                </button>
+                    }} className="absolute bottom-10 left-[47%] p-3 rounded-[15px] shadow-xl font-bold bg-gradient-to-r from-[#7CFF7C] to-gray-400 text-transparent bg-clip-text">Next question -></button>
+                </div>
             </div>
         </>
     );

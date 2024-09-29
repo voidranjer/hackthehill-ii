@@ -26,7 +26,7 @@ export default function Interview() {
     const [question, setQuestion] = useState("");
     const [response, setResponse] = useState("");
     const [loading, setLoading] = useState(true);
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(1);
     const [newQuestion, setNewQuestion] = useState(false);
     const [distractedTimes, setDistractedTimes] = useState("");
 
