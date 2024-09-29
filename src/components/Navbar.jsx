@@ -21,7 +21,7 @@ const Navbar = ({ }) => {
     }, []);
 
     return (
-        <div className="flex w-screen justify-center items-center absolute">
+        <div className="flex w-screen justify-center items-center absolute z-[0]">
             <div className="w-[80vw] bg-white rounded-2xl sticky mt-[1%]">
                 <div className="container mx-auto flex items-center p-4">
                     <Link className="flex items-center space-x-2" to={"/"}>

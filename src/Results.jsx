@@ -31,16 +31,16 @@ function buildPrompt(description, questions, response, resume, distractedTimes) 
 
         An exact response format should be:
         Communication: 5/5
-        Professionalism: 5/5
-        Knowledge: 5/5
-        Confidence: 5/5
-        Clarity: 5/5
+            Professionalism: 5/5
+            Knowledge: 5/5
+            Confidence: 5/5
+            Clarity: 5/5
 
-        What you did well:
-        - ...
+            What you did well:
+            - ...
 
-        What you could improve on:
-        - ...
+            What you could improve on:
+            - ...
 
         End of response.
 
@@ -98,12 +98,12 @@ export default function Results({ setStatus, setIndex, description, question, re
     return (
         <>
             <Navbar />
-            <div className="flex items-center justify-center h-screen bg-gray-100">
-                <div className="p-4 bg-white shadow-lg rounded-lg">
-                    <h1 className="text-2xl font-bold text-center">Results</h1>
-                    <p className="text-center">{question}</p>
-                    <p className="text-center">{response}</p>
-                    <div className="text-center">
+            <div className="flex items-center justify-center h-screen bg-gray-100 z-[100]">
+                <div className="p-4 bg-white shadow-lg rounded-lg z-[100]">
+                    <h1 className="text-2xl font-bold text-center">Results for {question}</h1>
+                    <hr className="mt-[2vw]"/>
+                    <p className="text-left mt-[3vw]">{response}</p>
+                    <div className="text-left">
                         <ReactMarkdown>{analysis}</ReactMarkdown>
                     </div>
                 </div>
