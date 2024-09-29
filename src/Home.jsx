@@ -1,9 +1,26 @@
 import React, { useState } from 'react';
-import { useAtom } from 'jotai';
-import { useNavigate } from 'react-router-dom';
-import pdfToText from 'react-pdftotext';
-import Navbar from './components/Navbar';
+import { useAtom } from 'jotai'
+import { Link, useNavigate } from 'react-router-dom';
+import pdfToText from "react-pdftotext";
+import Navbar from './components/navbar';
 import { resumeAtom } from './utils/jotai';
+import { jobs } from './utils/jobs';
+
+function JobPosting({ job }) {
+    const url = "/interview?description=" + encodeURIComponent("Company Name: " + job.company_name + " Job Title: " + job.job_title + " Job Location: " + job.location + " Job Description: " + job.job_description);
+
+    return (
+        <Link 
+            className='flex flex-col bg-red-300 w-full h-[264px]'
+            to={url}
+        >
+            <img src={job.icon} alt="Job Icon" className="object-contain w-10 h-12" />
+            <h2>{job.company_name} - {job.job_title}</h2>
+            <div>{job.posted_date} - {job.location}</div>
+            <p className='truncate text-wrap'>{job.job_description}</p>
+        </Link>
+    );
+}
 
 export default function Home() {
   const [description, setDescription] = useState('');
@@ -20,15 +37,12 @@ export default function Home() {
     navigate(`/interview?description=${compressedDescription}`);
   };
 
-  function extractText(event) {
-    const file = event.target.files[0];
-    pdfToText(file)
-      .then((text) => {
-        console.log('Resume', text);
-        setResume(text);
-      })
-      .catch((error) => console.error('Failed to extract text from pdf'));
-  }
+    function extractText(event) {
+        const file = event.target.files[0];
+        pdfToText(file)
+            .then((text) => { console.log("Resume", text); setResume(text) })
+            .catch((error) => console.error("Failed to extract text from pdf"));
+    }
 
   return (
     <div>
