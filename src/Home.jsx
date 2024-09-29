@@ -11,13 +11,14 @@ function JobPosting({ job }) {
 
     return (
         <Link 
-            className='hover:opacity-[60%] active:opacity-[30%] flex flex-col w-[80%] h-[264px] rounded-2xl'
+            className='p-2 text-center hover:opacity-[60%] active:opacity-[30%] bg-white justify-center items-center flex flex-col w-[80%] h-[264px] rounded-2xl'
             to={url}
         >
             <img src={job.icon} alt="Job Icon" className="object-contain w-10 h-12" />
             <h2>{job.company_name} - {job.job_title}</h2>
             <div>{job.posted_date} - {job.location}</div>
-            <p className='truncate text-wrap'>{job.job_description}</p>
+            {/* Job Location doesn't work */}
+            {/* <p className='truncate text-wrap'>{job.job_description}</p> */}
         </Link>
     );
 }
@@ -56,7 +57,7 @@ export default function Home() {
         <>
             <Navbar />
             <form onSubmit={handleFormSubmit}>
-                <div className="flex justify-center items-center w-screen h-screen flex-col bg-red-200 overflow-x-hidden">
+                <div className="flex justify-center items-center w-screen h-screen flex-col overflow-x-hidden">
                 {/* External Div */}
                 <div className="mt-[5vw] min-w-[400px] min-h-[300px] border-2 border-dashed border-[#818183] p-4 rounded-2xl">
                     {/* Interior Div */}
@@ -163,10 +164,10 @@ export default function Home() {
                         type="text"
                         value={description}
                         onChange={handleDescriptionChange}
-                        className="ml-2 p-2 border rounded bg-[#F8F8F8] border-none"
+                        className="ml-2 p-2 border rounded bg-[#DFDFDF] border-none"
                     />
                     <div className='flex w-full justify-center'>
-                    <button type="submit" className="w-[40%] gap-4 flex mt-[3vw] p-2 shadow-xl font-bold bg-gradient-to-r from-[#7CFF7C] to-gray-400 text-transparent bg-clip-text rounded">
+                    <button type="submit" className="w-[40%] gap-4 flex mt-[3vw] p-2 border-2 shadow-md font-bold bg-gradient-to-r from-[#7CFF7C] to-gray-400 text-transparent bg-clip-text rounded">
                     Get Started
                     <svg
                         width="38"
@@ -267,7 +268,8 @@ export default function Home() {
                 </div>
             
             {/* jobs */}
-            <div ref={sectionRef} className='overflow-x-hidden grid grid-cols-1 md:grid-cols-3 gap-5 h-screen overflow-y-auto'>
+
+            <div ref={sectionRef} className=' overflow-x-hidden justify-center p-5 grid grid-cols-1 md:grid-cols-3 gap-5 h-screen w-screen bg-[#dfdfdf] overflow-y-auto'>
                 {jobs.map((job) => (
                     <JobPosting key={job.job_title} job={job} />
                 ))}
