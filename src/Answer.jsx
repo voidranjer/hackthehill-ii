@@ -69,7 +69,7 @@ export default function Answer({ setStatus, question, setResponse, setDistracted
     useEffect(() => {
         // if distracted, save the distracted state and the time
         const currentTime = new Date().toLocaleTimeString();
-        setDistractedTimes((prevTimes) => `${prevTimes}(Time: ${currentTime} -> Was distracted: ${distracted}), `);
+        setDistractedTimes((prevTimes) => `${prevTimes}(Time: ${currentTime} -> Was tistracted: ${distracted}), `);
     }, [distracted]);
 
     const handleStartRecording = () => {

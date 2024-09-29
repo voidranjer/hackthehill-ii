@@ -11,7 +11,7 @@ function buildPrompt(description, questions) {
 
         Job Description: "${description}" End of job description.
 
-        Generate only ONE question that could be asked to help improve in a technical or behavioral aspect of the job for the job interview. The question should be open-ended and should not be a yes or no question.
+        Generate only ONE question that could be asked to help improve in a technical or behavioral aspect of the job for the job interview. The question should be open-ended and should not be a yes or no question. The question should relate to the job posting as much as possible.
 
         Questions already asked: "${questions}" End of questions. Do not ask a question that has already been asked.
 
