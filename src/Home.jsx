@@ -23,19 +23,19 @@ function JobPosting({ job }) {
 }
 
 export default function Home() {
-    const [description, setDescription] = useState('');
-    const [resume, setResume] = useAtom(resumeAtom);
-    const navigate = useNavigate();
+  const [description, setDescription] = useState('');
+  const [resume, setResume] = useAtom(resumeAtom);
+  const navigate = useNavigate();
 
-    const handleDescriptionChange = (event) => {
-        setDescription(event.target.value);
-    };
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
 
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-        const compressedDescription = encodeURIComponent(description);
-        navigate(`/interview?description=${compressedDescription}`);
-    };
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    const compressedDescription = encodeURIComponent(description);
+    navigate(`/interview?description=${compressedDescription}`);
+  };
 
     function extractText(event) {
         const file = event.target.files[0];
