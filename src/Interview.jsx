@@ -18,7 +18,7 @@ function buildPrompt(description, questions) {
 
         Questions already asked: "${questions}" End of questions. Do not ask a question that has already been asked.
 
-        The question should be directed to the interviewee, who is applying to the job. You should provide the question in only 1 line, and the question should be relevant to the job description provided. Do NOT add any additional markup formatting in your response and ONLY provide the question in the response.
+        The question should be directed to the interviewee, who is applying to the job. Reminder that this is a mock job interview, so you should only ask me questions appropriate to what a interviewer would ask a normal applicant like me. You should provide the question in only 1 line, and the question should be relevant to the job description provided. Do NOT add any additional markup formatting in your response and ONLY provide the question in the response.
     `;
 }
 

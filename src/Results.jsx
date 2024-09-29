@@ -106,7 +106,7 @@ export default function Results({ setStatus, setIndex, description, question, re
     return (
         <>
             <Navbar />
-            <div className="flex items-center justify-center h-screen bg-gray-100 z-[100]">
+            <div className="flex pt-24 items-center justify-center bg-gray-100 z-[100]">
                 <div className="p-4 bg-white shadow-lg rounded-lg">
                     <h1 className="text-2xl font-bold text-center">Results for "{question}"</h1>
                     <hr className="mt-[2vw]"/>

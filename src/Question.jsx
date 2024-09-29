@@ -40,7 +40,7 @@ export default function Question({ question, setStatus }) {
                         <h1 className='font-bold text-[28px] mb-[1vw]'>Question</h1>
                         <button
                         onClick={() => setStatus("interview")}
-                        className="mt-[10vw] hover:opacity-[60%] active:opacity-[30%] fixed px-4 py-2 bg-[#7CFF7C] text-white rounded-lg"
+                        className="mt-[10vw] hover:opacity-[60%] active:opacity-[30%] fixed px-4 py-2 bg-green-500 text-white rounded-lg"
                         >
                         Start Interview
                         </button>
