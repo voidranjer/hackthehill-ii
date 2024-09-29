@@ -3,8 +3,9 @@ import { gemini_prompt } from "./gemini/gemini";
 import ReactMarkdown from "react-markdown";
 import { useAtom } from "jotai";
 
-import { resumeAtom, historyAtom } from "./utils/jotai";
+import { resumeAtom, historyAtom, progressAtom } from "./utils/jotai";
 import Navbar from "./components/Navbar";
+import FinalResults from "./FinalResults";
 
 function buildPrompt(description, questions, response, resume, distractedTimes) {
     return `
@@ -55,6 +56,7 @@ export default function Results({ setStatus, setIndex, description, question, re
 
     const [resume] = useAtom(resumeAtom);
     const [history, setHistory] = useAtom(historyAtom);
+    const [progress] = useAtom(progressAtom);
 
     useEffect(() => {
         // Set the prompt
@@ -94,6 +96,12 @@ export default function Results({ setStatus, setIndex, description, question, re
             console.log("History: ", history);
         }
     }, [analysis]);
+
+    if (progress >= 100) {
+        return (
+            <FinalResults />
+        );
+    }
 
     return (
         <>

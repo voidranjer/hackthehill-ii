@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useAtom } from "jotai";
 import { FiUser } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { progressAtom } from "../utils/jotai";
 import Logo from "./Logo";
 
 const Navbar = ({ }) => {
-    const [progress, setProgress] = useState(70); // example progress value
-
-    useEffect(() => {
-        // Simulate progress update over time
-        const interval = setInterval(() => {
-            setProgress((oldProgress) => {
-                if (oldProgress >= 100) {
-                    clearInterval(interval);
-                    return 100;
-                }
-                return oldProgress + 10;
-            });
-        }, 1000);
-        return () => clearInterval(interval);
-    }, []);
+    // const [progress, setProgress] = useState(0); // example progress value
+    const [progress, setProgress] = useAtom(progressAtom);
+    
+    if (progress > 100) {
+        setProgress(100);
+    }
 
     return (
         <div className="flex w-screen justify-center items-center absolute z-[0]">

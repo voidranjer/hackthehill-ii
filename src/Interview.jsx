@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { gemini_prompt } from "./gemini/gemini";
+import { useAtom } from "jotai";
+import { progressAtom } from "./utils/jotai";
 import Question from "./Question";
 import Answer from "./Answer";
 import Results from "./Results";
+import FinalResults from "./FinalResults";
 
 function buildPrompt(description, questions) {
     return `
@@ -15,7 +18,7 @@ function buildPrompt(description, questions) {
 
         Questions already asked: "${questions}" End of questions. Do not ask a question that has already been asked.
 
-        You should provide the question in only 1 line, and the question should be relevant to the job description provided. Do NOT add any additional markup formatting in your response and ONLY provide the question in the response.
+        The question should be directed to the interviewee, who is applying to the job. You should provide the question in only 1 line, and the question should be relevant to the job description provided. Do NOT add any additional markup formatting in your response and ONLY provide the question in the response.
     `;
 }
 
@@ -31,6 +34,8 @@ export default function Interview() {
     const [distractedTimes, setDistractedTimes] = useState("");
 
     const [searchParams] = useSearchParams();
+
+    const [progress, setProgress] = useAtom(progressAtom);
 
     useEffect(() => {
         const urlDescription = searchParams.get("description");
@@ -61,7 +66,11 @@ export default function Interview() {
         setNewQuestion(!newQuestion);
     }, [index]);
 
-    if (status === "question") {
+    if (progress >= 100) {
+        return (
+            <FinalResults />
+        );
+    } else if (status === "question") {
         return (
             <Question
                 loading={loading}
@@ -79,6 +88,7 @@ export default function Interview() {
             />
         );
     } else if (status === "results") {
+        setProgress(progress + 20); // increase the progress by 20%
         return (
             <Results 
                 setStatus={setStatus}
